@@ -16,13 +16,12 @@ import org.openqa.selenium.edge.EdgeOptions;
  */
 public class SeleniumTutorialV1 {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         System.out.println("Hello World!");
-
         searchGG();
     }
 
-    public static void searchGG() {
+    public static void searchGG() throws InterruptedException {
         ///1. Khai bao bien dai dien tro den trinh duyet se duoc mo/dc new
         WebDriver myBrowser; // ben obj thuoc bo thu vien Selenium
         //thang nay sex tro den trinh duyet khi dc new
@@ -43,24 +42,25 @@ public class SeleniumTutorialV1 {
         // code Selenium qua class Webdriver , EdgeDriver o day
         // biet cach choi voi cac class cua .exe vua roi, vi chung dang cung o trong may ao
 
-//        EdgeOptions opt = new EdgeOptions();
-//        opt.addArguments("--inprivate");
-//        myBrowser = new EdgeDriver(opt);
-        myBrowser = new EdgeDriver();
+        EdgeOptions opt = new EdgeOptions();
+        opt.addArguments("--lang=vn");
+        myBrowser = new EdgeDriver(opt);
+
         //4. viet code dung Selenium de noi chuyen voi Driver
         // Browser san sang thong qua Driver dua data cho minh (trang web trong ram)
         // cho minh duoi dang cay DOM - Document Obj Model
         // trang HTML tra ve trong RAM cua trinh duyet dc xem la 1 tree cac obj 
         // node/tag dc xem la 1 obj thuoc nhom WebElement
-
         myBrowser.get("https://www.youtube.com"); // duyet trang tren obj trinh duyet vua new
-         myBrowser.manage().window().maximize();
+        myBrowser.manage().window().maximize();
         // ta se di tim cac  tag, va hanh xu tren cac the. Cac the nay la obj 
         // nam tron obj to cua my Browser 
         WebElement searchBox = myBrowser.findElement(By.name("search_query"));
         searchBox.sendKeys("Giáo làng");
         searchBox.submit();
-       
+
+        Thread.sleep(10000);
+        myBrowser.quit();
     }
 
 //    public static void searchGG(){
